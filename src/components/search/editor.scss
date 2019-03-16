@@ -1,0 +1,13 @@
+/**
+ * Editor Styles for SearchPost Inpspector Component
+ *
+ * @since    [version]
+ * @version  [version]
+ */
+
+.edit-post-sidebar,
+.edit-post-settings-sidebar__panel-block {
+	.components-panel__body .llms-search input {
+		box-shadow: none;
+	}
+}

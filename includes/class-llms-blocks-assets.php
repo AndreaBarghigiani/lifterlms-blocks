@@ -5,8 +5,8 @@
  * Enqueue CSS/JS of all the blocks.
  *
  * @package LifterLMS_Blocks/Main
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -19,13 +19,13 @@ class LLMS_Blocks_Assets {
 	/**
 	 * Constructor
 	 *
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	public function __construct() {
 
 		add_action( 'enqueue_block_assets', array( $this, 'block_assets' ) );
-		add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ) );
+		add_action( 'enqueue_block_editor_assets', array( $this, 'editor_assets' ), 999 );
 
 	}
 
@@ -34,14 +34,14 @@ class LLMS_Blocks_Assets {
 	 *
 	 * `wp-blocks`: includes block type registration and related functions.
 	 *
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.1
 	 */
 	public function block_assets() {
 
 		wp_enqueue_style(
 			'llms-blocks',
-			plugins_url( 'dist/blocks.style.build.css', dirname( __FILE__ ) ),
+			LLMS_BLOCKS_PLUGIN_DIR_URL . '/dist/blocks.style.build.css',
 			array( 'wp-blocks' ),
 			LLMS_BLOCKS_VERSION
 		);
@@ -55,14 +55,14 @@ class LLMS_Blocks_Assets {
 	 * `wp-element`: includes the WordPress Element abstraction for describing the structure of your blocks.
 	 * `wp-i18n`: To internationalize the block's text.
 	 *
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.1
 	 */
 	public function editor_assets() {
 
 		wp_enqueue_script(
 			'lifterlms_blocks-cgb-block-js',
-			plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
+			LLMS_BLOCKS_PLUGIN_DIR_URL . '/dist/blocks.build.js',
 			array( 'wp-blocks', 'wp-i18n', 'wp-element' ),
 			LLMS_BLOCKS_VERSION,
 			true
@@ -70,7 +70,7 @@ class LLMS_Blocks_Assets {
 
 		wp_enqueue_style(
 			'lifterlms_blocks-cgb-block-editor-css',
-			plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
+			LLMS_BLOCKS_PLUGIN_DIR_URL . 'dist/blocks.editor.build.css',
 			array( 'wp-edit-blocks' ),
 			LLMS_BLOCKS_VERSION
 		);

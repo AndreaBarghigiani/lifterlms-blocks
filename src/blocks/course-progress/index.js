@@ -9,8 +9,15 @@
 import './style.scss';
 import './editor.scss';
 
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+const { __, setLocaleData } = wp.i18n;
+
+// setLocaleData( window.LLMS.l10n.strings, 'lifterlms' );
+
+/**
+ * Block Name
+ * @type {String}
+ */
+export const name = 'llms/course-progress';
 
 /**
  * Register: Course Progress Block
@@ -19,13 +26,16 @@ const { registerBlockType } = wp.blocks;
  * @param  {string}   name     Block name.
  * @param  {Object}   settings Block settings.
  * @return {?WPBlock}          The block, if it has been successfully, registered; otherwise `undefined`.
- * @since   [version]
- * @version [version]
+ * @since   1.0.0
+ * @version 1.0.0
  */
-export default registerBlockType( 'llms/course-progress', {
+export const settings = {
 	title: __( 'Course Progress', 'lifterlms' ),
-	icon: 'chart-area',
-	category: 'common', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
+	icon: {
+		foreground: '#2295ff',
+		src: 'chart-area'
+	},
+	category: 'llms-blocks', // common, formatting, layout widgets, embed. see https://wordpress.org/gutenberg/handbook/block-api/#category.
 	keywords: [
 		__( 'LifterLMS', 'lifterlms' ),
 	],
@@ -39,8 +49,8 @@ export default registerBlockType( 'llms/course-progress', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	edit: function( props ) {
 		// Creates a <div class='wp-block-llms-course-progress'></div>.
@@ -63,14 +73,14 @@ export default registerBlockType( 'llms/course-progress', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 * @param   {Object} props Block properties.
 	 * @return  {Function}
-	 * @since   [version]
-	 * @version [version]
+	 * @since   1.0.0
+	 * @version 1.0.0
 	 */
 	save: function( props ) {
 		return (
-			<div>
+			<div className={ props.className }>
 				[lifterlms_course_progress]
 			</div>
 		);
 	},
-} );
+}

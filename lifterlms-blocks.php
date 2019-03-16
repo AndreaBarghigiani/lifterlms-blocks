@@ -8,7 +8,7 @@
  * Plugin Name: LifterLMS Blocks
  * Plugin URI: https://github.com/gocodebox/lifterlms-blocks
  * Description: WordPress Editor (Gutenberg) blocks for LifterLMS.
- * Version: 0.0.1
+ * Version: 1.3.7
  * Author: LifterLMS
  * Author URI: https://lifterlms.com/
  * License: GPLv3
@@ -22,9 +22,40 @@ defined( 'ABSPATH' ) || exit;
 
 // Define Constants.
 if ( ! defined( 'LLMS_BLOCKS_VERSION' ) ) {
-	define( 'LLMS_BLOCKS_VERSION', '0.0.1' );
+	define( 'LLMS_BLOCKS_VERSION', '1.3.7' );
 }
 
-// Initialize Assets.
-require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-assets.php';
-require_once plugin_dir_path( __FILE__ ) . 'src/class-llms-blocks-templates.php';
+/**
+ * Allows disabling the blocks plugin & functionality.
+ *
+ * @filter llms_load_blocks_plugin
+ *
+ * @since    1.0.0
+ * @version  1.0.0
+ *
+ * @param    boolean $load Whether the plugin should be loaded. Defaults to `true`.
+ */
+if ( ! apply_filters( 'llms_load_blocks_plugin', true ) ) {
+	return;
+}
+
+// Load only if Gutenberg exists.
+if ( function_exists( 'has_blocks' ) ) {
+
+	if ( ! defined( 'LLMS_BLOCKS_PLUGIN_FILE' ) ) {
+		define( 'LLMS_BLOCKS_PLUGIN_FILE', __FILE__ );
+	}
+
+	if ( ! defined( 'LLMS_BLOCKS_PLUGIN_DIR' ) ) {
+		define( 'LLMS_BLOCKS_PLUGIN_DIR', dirname( LLMS_BLOCKS_PLUGIN_FILE ) );
+	}
+
+	if ( ! defined( 'LLMS_BLOCKS_PLUGIN_DIR_URL' ) ) {
+		define( 'LLMS_BLOCKS_PLUGIN_DIR_URL', plugin_dir_url( LLMS_BLOCKS_PLUGIN_FILE ) );
+	}
+
+	// Start.
+	require_once LLMS_BLOCKS_PLUGIN_DIR . '/includes/class-llms-blocks.php';
+
+}
+
