@@ -1,8 +1,9 @@
 /**
  * BLOCK: llms/pricing-table
  *
- * @since   1.0.0
- * @version 1.3.6
+ * @since 1.0.0
+ * @since 1.3.8 Explicitly import jQuery.
+ * @version 1.3.8
  */
 
 // WP Deps.
@@ -21,6 +22,9 @@ const { __ } = wp.i18n;
 // Internal Deps.
 import './editor.scss';
 import './subscribe';
+
+// Import jQuery.
+import $ from 'jquery';
 
 /**
  * Block Name
